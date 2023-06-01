@@ -1,5 +1,3 @@
-name: Docker Image CI
-
 on:
   push:
     branches: [ "main" ]
@@ -7,12 +5,17 @@ on:
     branches: [ "main" ]
 
 jobs:
-
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+      - uses: actions/checkout@v3
+
+      - name: Build the Docker image
+        run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+
+      - name: Log into Docker Hub
+        run: docker login -u bhives2022 -p VEGAcore2016
+
+      - name: Push the Docker image to Docker Hub
+        run: docker push my-image-name:$(date +%s)
