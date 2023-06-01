@@ -16,11 +16,10 @@ jobs:
         run: echo "::set-output name=timestamp::$(date +%s)"
 
       - name: Build the Docker image
-        run: docker build .devcontainer --file .devcontainer/Dockerfile --tag my-image-name:${{ steps.timestamp.outputs.timestamp }}
+        run: docker build .devcontainer --file .devcontainer/Dockerfile --tag beehives2022/search:${{ steps.timestamp.outputs.timestamp }}
 
       - name: Log into Docker Hub
         run: docker login -u beehives2022 -p VEGAcore2016
 
-     - name: Push the Docker image to Docker Hub
-  run: docker push beehives2022/search:tagname:${{ steps.timestamp.outputs.timestamp }}
-
+      - name: Push the Docker image to Docker Hub
+        run: docker push beehives2022/search:${{ steps.timestamp.outputs.timestamp }}
