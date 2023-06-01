@@ -21,5 +21,6 @@ jobs:
       - name: Log into Docker Hub
         run: docker login -u beehives2022 -p VEGAcore2016
 
-      - name: Push the Docker image to Docker Hub
-        run: docker push my-image-name:${{ steps.timestamp.outputs.timestamp }}
+     - name: Push the Docker image to Docker Hub
+  run: docker push beehives2022/search:tagname:${{ steps.timestamp.outputs.timestamp }}
+
